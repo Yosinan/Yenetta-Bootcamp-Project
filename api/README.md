@@ -1,4 +1,4 @@
-# Yenetta Code Bootcamp Project - Backend
+# Product Management System - Backend
 
 This is the backend part of a MERN (MongoDB, Express.js, React, Node.js) project for performing CRUD operations on products. The backend provides the API for creating, reading, updating, and deleting product information.
 

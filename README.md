@@ -1,4 +1,4 @@
-# Yenetta Code Bootcamp Project 
+# Yenetta Code Bootcamp Project - Product Management System
 
 This is a MERN (MongoDB, Express.js, React, Node.js) project that allows you to perform CRUD operations on products. The project consists of both the frontend and backend components.
 

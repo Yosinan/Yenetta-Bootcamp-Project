@@ -1,4 +1,4 @@
-# Yenetta Code Bootcamp Project - Frontend
+# Product Management System - Frontend
 
 
 This is the frontend part of a MERN (MongoDB, Express.js, React, Node.js) project for performing CRUD operations on products. The frontend provides a user interface for interacting with product data.
