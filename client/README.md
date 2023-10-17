@@ -40,5 +40,5 @@ Bootstrap
 Axios
 
 ## Author
-Yoseph Zewdu
+[Yoseph Zewdu](https://github.com/Yosinan/)
 

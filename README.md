@@ -66,7 +66,7 @@ This is a MERN (MongoDB, Express.js, React, Node.js) project that allows you to 
 - Axios
 
 ## Author
-Yoseph Zewdu
+[Yoseph Zewdu](https://github.com/Yosinan/)
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
