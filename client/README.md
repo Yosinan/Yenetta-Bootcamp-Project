@@ -29,6 +29,7 @@ This is the frontend part of a MERN (MongoDB, Express.js, React, Node.js) projec
     
         ```bash
         npm start
+        
         ```
     
         The frontend server will start at http://localhost:3000.
