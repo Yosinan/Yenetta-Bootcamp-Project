@@ -26,14 +26,13 @@ This is the backend part of a MERN (MongoDB, Express.js, React, Node.js) project
 
 3. Configure environment variables:
 
- Create a .env file and set the MongoDB connection string and PORT number:
-
+    Create a .env file and set the MongoDB connection string and PORT number:
+    
     ```bash
     PORT=5000
     MONGODB_URI=mongodb://localhost:27017/your-database-name
-        
-        ```
-
+    
+    ```
 4. Start the server:
 
     ```bash
