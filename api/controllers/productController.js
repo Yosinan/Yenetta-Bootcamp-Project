@@ -1,11 +1,19 @@
 const Product = require('../models/productModel');
-
+const { Counter } = require('../database');
 // Set up routes for products
 
 // Add products 
 const addItem = async (req, res) => {
     try {
+
+        // const nextId = await Counter.findOneAndUpdate(
+        //     { _id: 'product_counter' },
+        //     { $inc: { seq: 1 } },
+        //     { new: true, upsert: true }
+        // );
+
         const product = new Product({
+            // prodId: nextId.seq,
             name: req.body.name.toUpperCase(),
             description: req.body.description,
             price: req.body.price,
@@ -49,7 +57,6 @@ const getItems = async (req, res, next) => {
 const deleteItem = async (req, res, next) => {
     try {
         const productId = req.params.id;
-        console.log(productId)
 
         const product = await Product.findOne({ _id: productId });
         if (!product) {

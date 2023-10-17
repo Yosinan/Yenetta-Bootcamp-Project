@@ -30,7 +30,7 @@ function Dashboard() {
   const [showSort, setShowSort] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Default");
   const [currenPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showModal, setShowModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
@@ -324,6 +324,7 @@ function Dashboard() {
             <thead>
               <tr>
                 {/* <th scope="col">ID</th> */}
+                <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
@@ -335,7 +336,7 @@ function Dashboard() {
             <tbody>
               {itemsToDisplay.map((item) => (
                 <tr key={item.id}>
-                  {/* <th scope="row">{item.id}</th> */}
+                  <th scope="row">{item.prodId}</th>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>

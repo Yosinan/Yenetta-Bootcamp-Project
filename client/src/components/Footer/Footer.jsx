@@ -10,7 +10,7 @@ function Footer() {
                
                 <div class="copyright_section">
                     <div class="container">
-                        <p class="copyright_text">Made by Yos © {getFullYear()}  <a href=""></a></p>
+                    <p class="copyright_text">Made by <a href='https://github.com/Yosinan/'>Yoseph</a> © {getFullYear()}  <a href=""></a></p>
                     </div>
                 </div>
           </div>
