@@ -31,23 +31,21 @@ This is the backend part of a MERN (MongoDB, Express.js, React, Node.js) project
     ```bash
     PORT=5000
     MONGODB_URI=mongodb://localhost:27017/your-database-name
-
     ```
 
 4. Start the server:
 
     ```bash
     npm start
-
     ```
 
     The backend server will start at http://localhost:5000 or the port specified in your .env file.
 
 ## API Endpoints
-GET api/products: Get a list of all products.
-POST api/products/add: Create a new product.
-PUT api/products/edit/:id: Update a product by ID.
-DELETE api/products/delete/:id: Delete a product by ID.
+- GET api/products: Get a list of all products.
+- POST api/products/add: Create a new product.
+- PUT api/products/edit/:id: Update a product by ID.
+- DELETE api/products/delete/:id: Delete a product by ID.
 
 ## Built With
 Node.js

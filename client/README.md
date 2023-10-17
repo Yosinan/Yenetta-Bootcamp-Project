@@ -14,7 +14,7 @@ This is the frontend part of a MERN (MongoDB, Express.js, React, Node.js) projec
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone  https://github.com/Yosinan/Yenetta-Bootcamp-Project.git
    cd client
 
     ```
@@ -29,7 +29,6 @@ This is the frontend part of a MERN (MongoDB, Express.js, React, Node.js) projec
     
         ```bash
         npm start
-    
         ```
     
         The frontend server will start at http://localhost:3000.
