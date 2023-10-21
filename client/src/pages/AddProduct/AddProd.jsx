@@ -18,8 +18,7 @@ const AddProd = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [validated, setValidated] = useState(false);
-
-
+  const [available, setAvailable] = useState(true);
 
 
   useEffect(() => {
@@ -46,6 +45,10 @@ const AddProd = () => {
     setQuantity(event.target.value);
   }
 
+  const handleAvailableChange = (event) => {
+    setAvailable(event.target.checked);
+  };
+
   const handleKeyPress = (event) => {
     if (event.key === '-' || event.key === '+' || event.key === 'e') {
       event.preventDefault();
@@ -63,7 +66,8 @@ const AddProd = () => {
         price,
         quantity,
         dateAdded: new Date().toLocaleDateString(),
-        description
+        description,
+        available,
       });
 
       setName("");
@@ -117,8 +121,6 @@ const AddProd = () => {
   };
 
   const handleStepClick = (stepIndex) => {
-    // const updatedStepStatuses = [...stepStatuses];
-    // updatedStepStatuses[stepIndex] = true;
     setCurrentStep(stepIndex);
   };
 
@@ -128,8 +130,9 @@ const AddProd = () => {
     <>
       {successMessage && <Status message={successMessage} type="success" />}
       {errorMessage && <Status message={errorMessage} type="error" />}
+      <button className='btn btn-outline-grey' onClick={() => window.location = "/"}><FontAwesomeIcon icon={faArrowLeft} /> Go back</button>
       <div>
-        <div class="wrapper ">
+        <div class="wrapper">
           <Form noValidate validated={validated} id="order-form" onSubmit={handleSubmit}>
             <Form.Group className="ordershadow" id="wizard" controlId="formName">
               <h3>Post Item</h3>
@@ -144,9 +147,6 @@ const AddProd = () => {
               <h4></h4>
               {currentStep === 0 && (
                 <section>
-                  {/* {validated && (
-                    <p className="error-message">Please fill in all required fields.</p>
-                  )} */}
                   <span class="required-indicator">*</span>
                   <div class="form-row">
                     <input
@@ -169,7 +169,6 @@ const AddProd = () => {
                       onChange={handlePriceChange}
                       placeholder="Price" />
                   </div>
-
                   <span class="required-indicator">*</span>
                   <div class="form-row">
                     <input
@@ -181,6 +180,14 @@ const AddProd = () => {
                       onKeyDown={handleKeyPress}
                       onChange={handleQuantityChange}
                       placeholder="Quantity" />
+                  </div>
+                  <div className="form-group form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={available}
+                      onChange={handleAvailableChange} />
+                    <label className="form-check-label">Available</label>
                   </div>
                   <span class="required-indicator">*</span>
                   <div class="form-row" style={{ marginBottom: "18px" }}>

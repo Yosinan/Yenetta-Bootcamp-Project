@@ -17,7 +17,8 @@ const addItem = async (req, res) => {
             name: req.body.name.toUpperCase(),
             description: req.body.description,
             price: req.body.price,
-            quantity: req.body.quantity
+            quantity: req.body.quantity,
+            available: req.body.available,
 
         })
 
@@ -38,11 +39,18 @@ const addItem = async (req, res) => {
 // GET all products
 const getItems = async (req, res, next) => {
     try {
-        
+        const { available } = req.query;
+        console.log("available: ", available);
         const products = await Product.find();
-        if (products.length != 0){
-        res.status(200).json(products);
+        
+        if (available) {
+            const filteredProducts = products.filter((product) => product.available === (available === 'true'));
+            res.status(200).json(filteredProducts);
         }
+        else if (products) {
+            res.status(200).json(products);
+        }
+
         else {
             res.status(404).json({message: 'No Products were found'});
         }
@@ -80,7 +88,7 @@ const editItem = async (req, res, next) => {
         const product = await Product.findOne({ _id: productId });
 
         if (!product) {
-            return res.status(404).send("Product not found or unauthorized to edit.");
+            return res.status(404).send("Product not found ");
         }
 
         product.set(req.body);

@@ -15,12 +15,11 @@ import {
 import Status from "../Status/Status";
 
 
+
 function Dashboard() {
 
 
   const [sortOption, setSortOption] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
-  const [filterOption, setFilterOption] = useState([]);
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -36,6 +35,7 @@ function Dashboard() {
   const [newDescription, setNewDescription] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [newQuantity, setNewQuantity] = useState("");
+  const [newAvailable, setNewAvailable] = useState(true);
 
 
   const itemsToDisplay = items.slice(
@@ -90,7 +90,7 @@ function Dashboard() {
       try {
 
 
-        const url = 'http://localhost:5000/api/products/';
+        const url = `http://localhost:5000/api/products?available=${sortOption}`;
         const response = await axios.get(url);
 
         if (response.status === 200) {
@@ -110,16 +110,14 @@ function Dashboard() {
       }
     };
     fetchitems();
-  }, [sortOption, sortOrder, filterOption]);
+  }, [sortOption]);
 
 
   const sortingOptions = [
     { label: 'All', icon: faList },
     { label: 'Out-of-Stock', icon: faExclamationCircle },
-    { label: 'Avaialable', icon: faCheckCircle }
+    { label: 'Available', icon: faCheckCircle }
   ];
-
-
 
 
   const handleSuccess = () => {
@@ -148,7 +146,7 @@ function Dashboard() {
     setNewDescription(item.description);
     setNewPrice(item.price);
     setNewQuantity(item.quantity);
-
+    setNewAvailable(item.available);
     setShowEditModal(true);
   };
 
@@ -160,6 +158,7 @@ function Dashboard() {
         description: newDescription,
         unitPrice: newPrice,
         quantity: newQuantity,
+        available: newAvailable,
 
       };
       const response = await axios.put(url, updatedItem);
@@ -216,28 +215,20 @@ function Dashboard() {
 
     if (option === "All") {
       setSortOption("");
-      setSortOrder("");
+    
     }
     if (option === "Available") {
-      setSortOption("name");
-      setSortOrder("asc");
+      setSortOption("true");
+      
     }
     if (option === "Out-of-Stock") {
-      setSortOption("unitPrice");
-      setSortOrder("desc");
+      setSortOption("false");
+     
     }
     setShowSort(false);
   };
 
 
-  const openProductDetails = (productId) => {
-    const product = items.find((p) => p.id === productId);
-    setSelectedProduct(product);
-  };
-
-  const closeProductDetails = () => {
-    setSelectedProduct(null);
-  };
 
 
 
@@ -285,49 +276,16 @@ function Dashboard() {
           
 
           {/* Main content */}
-          {/* <div className={dash.content}>
-            {items.length === 0 && <p className={dash.noItem}>No items found.</p>}
-            {itemsToDisplay.map((item) => (
-              <div key={item.id} className={dash.productItem} onClick={() => openProductDetails(item.id)}>
-                <h2>{item.name}</h2>
-                <b>ETB: {item.price}</b>
-
-                <p>Quantity: {item.quantity}</p>
-              </div>
-            ))}
-
-            {selectedProduct && (
-
-              <div className={dash.productDetailsModal}>
-                <div className={dash.productDetails}>
-                  <button className={dash.closeButton} onClick={closeProductDetails}>
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                  <p className="description">
-                    Description:{" "}
-                    {selectedProduct.description.length > 10
-                      ? `${selectedProduct.description.slice(0, 10)}...`
-                      : selectedProduct.description}{" "}
-                    {selectedProduct.description.length < 100 && (
-                      <button className="btn btn-link" onClick={handleShowFullDescription}>
-                        See More
-                      </button>
-                    )}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div> */}
-      
-         
-          <table className="table table-striped">
+        
+          <table className="table table-bordered table-hover">
             <thead>
               <tr>
                 {/* <th scope="col">ID</th> */}
-                <th scope="col">Id</th>
+                {/* <th scope="col">Id</th> */}
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Available</th>
                 <th scope="col">Description</th>
                 <th scope="col ">Actions</th>
 
@@ -336,10 +294,11 @@ function Dashboard() {
             <tbody>
               {itemsToDisplay.map((item) => (
                 <tr key={item.id}>
-                  <th scope="row">{item.prodId}</th>
+                  {/* <th scope="row">{item.prodId}</th> */}
                   <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>
+                  <td className={item.available ? 'text-success' : 'text-danger'}>{item.available ? "Yes" : "No"}</td>
                   <td>{item.description}</td>
                   <td>
                     <button className="btn-sm btn-outline-primary" onClick={() => handleEdit(item)}>Edit</button>
@@ -417,6 +376,17 @@ function Dashboard() {
                   onChange={(e) => setNewQuantity(e.target.value)}
                 />
               </div>
+
+              <div className="form-group form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={newAvailable}
+                  onChange={() => setNewAvailable(!newAvailable)}
+                />
+                <label className="form-check-label">Available</label>
+              </div>
+
             </Modal.Body>
             <Modal.Footer>
               <Button variant="light" onClick={() => setShowEditModal(false)}>

@@ -24,6 +24,11 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    available: {
+        type: Boolean,
+        required: true,
+        
+    },
     dateAdded: {
         type: Date,
         default: Date.now,
