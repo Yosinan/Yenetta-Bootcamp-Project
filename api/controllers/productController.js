@@ -40,7 +40,6 @@ const addItem = async (req, res) => {
 const getItems = async (req, res, next) => {
     try {
         const { available } = req.query;
-        console.log("available: ", available);
         const products = await Product.find();
         
         if (available) {
